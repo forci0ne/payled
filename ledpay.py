@@ -14,7 +14,13 @@ from iota import Address
 # setting up the 0/I raspberry pin's
 LEDPIN = 18
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(LEDPIN,GPIO.OUT)
+GPIO.output(LEDPIN,GPIO.LOW)
 
+# function for checking balance on a iota adress
 
-
+def checkBalance():
+    print ("checking balance.....")
+    gb_result = api.
 
