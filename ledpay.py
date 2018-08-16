@@ -35,7 +35,7 @@ def checkBalance():
     return (balance[0])
 
 # get current balance and use as baseline
-currentBalance = checkBalance()
+currentbalance = checkBalance()
 lastbalance = currentbalance
 
 # some variables
