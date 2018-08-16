@@ -18,9 +18,25 @@ GPIO.setwarnings(False)
 GPIO.setup(LEDPIN,GPIO.OUT)
 GPIO.output(LEDPIN,GPIO.LOW)
 
-# function for checking balance on a iota adress
+# url to IOTA full node when checking balance on IOTA tangle
+iotaNode = "....."      # check if full node is added
 
-def checkBalance():
-    print ("checking balance.....")
-    gb_result = api.
+# creating a IOTA object
+api = Iota(iotaNode, "")
+
+# IOTA address to be checked for funds
+address =[Address(b'9JVCOSTCHHMYD9QBPPJBCNSZDQQRBRELXBXS9CDGINCQPCNFKLHLEQCGGRAOYMCWRZDNXXFALMV9I99LXQZSBDFZJW')]
+
+# function for checking balance on a iota adress
+def checkAddressBalance():
+    print ("checking address balance.....")
+    gb_result = api.get_balances(address)
+    balance = gb_result['balances']
+    return (balance[0])
+
+print checkAddressBalance()
+
+time.sleep(10)
+
+
 
