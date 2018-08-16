@@ -50,6 +50,29 @@ while True:
     if balcheckcount == 10:
         currentbalance = checkBalance()
         if currentbalance > lastbalance:
+            lightbalance = lightbalance + (currentbalance - lastbalance)
+            lastbalance = currentbalance
+        balcheckcount = 0
 
+    # manage light balance and light ON/OFF
+    if lightbalance > 0:
+        if lightstatus == False:
+            print ("light ON")
+            GPIO.output(LEDPIN,GPIO.HIGH)
+            lightstatus = True
+        lightbalance = lightbalance -1
 
+    else:
+        if lightstatus == True:
+            print("light OFF")
+            GPIO.output(LEDPIN,GPIO.LOW)
+            lightstatus = False
 
+    # print remaining light balance
+    print(datetime.timedelta(seconds=lightbalance))
+
+    # increase balance check counter
+    balcheckcount = balcheckcount +1
+
+    # pause for 1 sec
+    time.sleep(1)
