@@ -19,7 +19,7 @@ GPIO.setup(LEDPIN,GPIO.OUT)
 GPIO.output(LEDPIN,GPIO.LOW)
 
 # url to IOTA full node when checking balance on IOTA tangle
-iotaNode = "....."      # check if full node is added
+iotaNode = "https://nodes.iota.fm:443"      # check if full node is added
 
 # creating a IOTA object
 api = Iota(iotaNode, "")
@@ -28,15 +28,28 @@ api = Iota(iotaNode, "")
 address =[Address(b'9JVCOSTCHHMYD9QBPPJBCNSZDQQRBRELXBXS9CDGINCQPCNFKLHLEQCGGRAOYMCWRZDNXXFALMV9I99LXQZSBDFZJW')]
 
 # function for checking balance on a iota adress
-def checkAddressBalance():
+def checkBalance():
     print ("checking address balance.....")
     gb_result = api.get_balances(address)
     balance = gb_result['balances']
     return (balance[0])
 
-print checkAddressBalance()
+# get current balance and use as baseline
+currentBalance = checkBalance()
+lastbalance = currentbalance
 
-time.sleep(10)
+# some variables
+lightbalance = 0
+balcheckcount = 0
+lightstatus = False
+
+# main loop that executes every 1 second
+while True:
+
+    #check for new funds and add to lightbalance when found
+    if balcheckcount == 10:
+        currentbalance = checkBalance()
+        if currentbalance > lastbalance:
 
 
 
